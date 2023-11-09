@@ -69,4 +69,11 @@ public static class Helpers
         nodeFilter += $"[@class='{htmlClass}']";
         return doc.DocumentNode.SelectNodes(nodeFilter);
     }
+    
+    internal static async Task<HtmlDocument> LoadResponseAsHtmlDoc(this HttpResponseMessage response)
+    {
+        var htmlDoc = new HtmlDocument();
+        htmlDoc.LoadHtml(await response.Content.ReadAsStringAsync());
+        return htmlDoc;
+    }
 }

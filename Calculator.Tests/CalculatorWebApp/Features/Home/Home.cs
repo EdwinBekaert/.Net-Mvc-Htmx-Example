@@ -17,14 +17,14 @@ public class Home : WebAppFixtureBaseTest
     public async Task Feature_Endpoints(string url, string title)
     {
         var response = await Client.GetAndValidateResponse(url);
-        var doc = await Client.LoadResponseAsHtmlDoc(response);
+        var doc = await response.LoadResponseAsHtmlDoc();
         doc.NodeContainsInnerText("title", title);
     }
     [Fact]
     public async Task Should_Display_Centered_Welcome_Header()
     {
         var response = await Client.GetAndValidateResponse("/");
-        var doc = await Client.LoadResponseAsHtmlDoc(response);
+        var doc = await response.LoadResponseAsHtmlDoc();
         doc.NodeContainsInnerText("h1", "Welcome");
         doc.NodeContainsHtmlClass("div", "text-center");
     }

@@ -11,7 +11,7 @@ public class Error : WebAppFixtureBaseTest
     public async Task Should_Display_Title_Headers_Paragraphs()
     {
         var response = await Client.GetAndValidateResponse("/Home/Error");
-        var doc = await Client.LoadResponseAsHtmlDoc(response);
+        var doc = await response.LoadResponseAsHtmlDoc();
         var title = doc.GetNodeInnerText("title");
         title = title.Replace(" - app", ""); // layout adds " - app"
         doc.NodeContainsInnerText("h1", title);

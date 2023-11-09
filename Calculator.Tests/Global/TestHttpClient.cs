@@ -46,10 +46,4 @@ public class TestHttpClient
         response.ValidateSuccessResponse();
         return response;
     }
-    protected internal async Task<HtmlDocument> LoadResponseAsHtmlDoc(HttpResponseMessage response)
-    {
-        var htmlDoc = new HtmlDocument();
-        htmlDoc.LoadHtml(await response.Content.ReadAsStringAsync());
-        return htmlDoc;
-    }
 }

@@ -4,7 +4,7 @@ using FluentAssertions;
 
 namespace Calculator.Tests;
 
-public class UnitTests
+public class CalculatorAppTests
 {
     [Theory]
     [InlineData(5,5)]

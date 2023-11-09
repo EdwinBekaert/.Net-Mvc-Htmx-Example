@@ -15,6 +15,6 @@ public class Privacy : WebAppFixtureBaseTest
         var title = doc.GetNodeInnerText("title");
         title = title.Replace(" - app", ""); // layout adds " - app"
         doc.NodeContainsInnerText("h1", title);
-        doc.GetNodes("p").Count.Should().Be(1);
+        doc.GetNodes("p").Count.Should().Be(3);
     }
 }

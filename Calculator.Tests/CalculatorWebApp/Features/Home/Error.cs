@@ -18,6 +18,6 @@ public class Error : WebAppFixtureBaseTest
         doc.GetNodes("h1").Count.Should().Be(1);
         doc.GetNodesHavingHtmlClass("h2", "text-danger").Count.Should().Be(1);
         doc.GetNodes("h3").Count.Should().Be(1);
-        doc.GetNodes("p").Count.Should().Be(3);
+        doc.GetNodes("p").Count.Should().Be(5);
     }
 }

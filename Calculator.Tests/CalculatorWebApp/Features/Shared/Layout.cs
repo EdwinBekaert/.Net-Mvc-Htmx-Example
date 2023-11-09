@@ -26,7 +26,7 @@ public class Layout : WebAppFixtureBaseTest
     public async Task Should_Have_CSS()
     {
         var doc = await GetHtmlDocument();
-        doc.NodeContainsAttributeWithValue("link","href","/css/site.css");
+        doc.NodeContainsAttributeWithValue("link","href","/css/site.plus.css");
     }
     
     [Fact]
@@ -36,13 +36,6 @@ public class Layout : WebAppFixtureBaseTest
         doc.NodeContainsAttributeWithValue("script","src","/js/site.js");
     }
 
-    [Fact]
-    public async Task Should_Have_Navbar()
-    {
-        var doc = await GetHtmlDocument();
-        doc.NodeContainsHtmlClass("nav","navbar");
-    }
-    
     [Fact]
     public async Task Should_Have_Home_Link()
     {

@@ -4,15 +4,20 @@ namespace Calculator.Tests.CalculatorWebApp.Features.Shared;
 
 public class Layout : WebAppFixtureBaseTest
 {
+    private static Lazy<HttpResponseMessage>? _response; // one call for all tests...
+    private static HttpResponseMessage GetAndValidateResponse(TestHttpClient client)
+    {
+        return client.GetAndValidateResponse("/").Result;
+    }
+    public Layout(WebApplicationFactory<Program> factory)
+        : base(factory) 
+        => _response ??= new Lazy<HttpResponseMessage>(()=>GetAndValidateResponse(Client));
 
-    public Layout(WebApplicationFactory<Program> factory) 
-        : base(factory) { }
-    
     [Fact]
     public async Task Should_Have_CSS()
     {
-        // var response = await GetAndValidateResponse("/");
-        // var doc = await LoadResponseAsHtmlDoc(response);
+        var response = _response!.Value;
+        var doc = await response.LoadResponseAsHtmlDoc();
         // doc.NodeContainsInnerText("h1", "Welcome");
         // doc.NodeContainsHtmlClass("div", "text-center");
     }
@@ -20,8 +25,8 @@ public class Layout : WebAppFixtureBaseTest
     [Fact]
     public async Task Should_Have_CSS2()
     {
-        // var response = await GetAndValidateResponse("/");
-        // var doc = await LoadResponseAsHtmlDoc(response);
+        var response = _response!.Value;
+        var doc = await response.LoadResponseAsHtmlDoc();
         // doc.NodeContainsInnerText("h1", "Welcome");
         // doc.NodeContainsHtmlClass("div", "text-center");
     }

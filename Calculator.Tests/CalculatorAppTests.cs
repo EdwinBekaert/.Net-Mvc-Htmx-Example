@@ -1,7 +1,3 @@
-
-
-using FluentAssertions;
-
 namespace Calculator.Tests;
 
 public class CalculatorAppTests

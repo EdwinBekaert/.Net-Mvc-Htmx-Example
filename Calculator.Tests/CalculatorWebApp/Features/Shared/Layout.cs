@@ -9,31 +9,51 @@ public class Layout : WebAppFixtureBaseTest
     {
         return client.GetAndValidateResponse("/").Result;
     }
-    public Layout(WebApplicationFactory<Program> factory)
-        : base(factory) 
-        => _response ??= new Lazy<HttpResponseMessage>(()=>GetAndValidateResponse(Client));
+    public Layout(WebApplicationFactory<Program> factory) : base(factory)
+    {
+        _response ??= new Lazy<HttpResponseMessage>(() => GetAndValidateResponse(Client));
+        
+    }
+    
+    private static async Task<HtmlDocument> GetHtmlDocument()
+    {
+        var response = _response!.Value;
+        var doc = await response.LoadResponseAsHtmlDoc();
+        return doc;
+    }
 
     [Fact]
     public async Task Should_Have_CSS()
     {
-        var response = _response!.Value;
-        var doc = await response.LoadResponseAsHtmlDoc();
-        // doc.NodeContainsInnerText("h1", "Welcome");
-        // doc.NodeContainsHtmlClass("div", "text-center");
+        var doc = await GetHtmlDocument();
+        doc.NodeContainsAttributeWithValue("link","href","/css/site.css");
     }
     
     [Fact]
-    public async Task Should_Have_CSS2()
+    public async Task Should_Have_JS()
     {
-        var response = _response!.Value;
-        var doc = await response.LoadResponseAsHtmlDoc();
-        // doc.NodeContainsInnerText("h1", "Welcome");
-        // doc.NodeContainsHtmlClass("div", "text-center");
+        var doc = await GetHtmlDocument();
+        doc.NodeContainsAttributeWithValue("script","src","/js/site.js");
+    }
+
+    [Fact]
+    public async Task Should_Have_Navbar()
+    {
+        var doc = await GetHtmlDocument();
+        doc.NodeContainsHtmlClass("nav","navbar");
     }
     
-    // <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    // <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    // <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-    // <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    // <script src="~/js/site.js" asp-append-version="true"></script>
+    [Fact]
+    public async Task Should_Have_Home_Link()
+    {
+        var doc = await GetHtmlDocument();
+        doc.NodeContainsInnerText("a","Home");
+    }
+    
+    [Fact]
+    public async Task Should_Have_Privacy_Link()
+    {
+        var doc = await GetHtmlDocument();
+        doc.NodeContainsInnerText("a","Privacy");
+    }
 }

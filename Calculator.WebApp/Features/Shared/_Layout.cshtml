@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - app</title>
     <link rel="stylesheet" href="~/css/bulma.min.css" />
-    <link rel="stylesheet" href="~/css/site.plus.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.plus.css" asp-append-version="true" />
 </head>
 <body hx-ext="morph" class="hero is-fullheight">
 <div class="header is-fixed-top columns has-text-grey-lighter p-0 mx-0 my-0 is-align-content-center is-justify-content-center" id="navBar">
     <span class="column p-0">
         <a class="button menu-button menu-button-left" asp-controller="Home" asp-action="Index">Home</a>
         <a class="button menu-button menu-button-left" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <a class="button menu-button menu-button-left" asp-controller="Calculator" asp-action="Index"><i class="fa fa-solid fa-calculator"></i>&nbsp;Calculator</a>
     </span>
 </div>
     

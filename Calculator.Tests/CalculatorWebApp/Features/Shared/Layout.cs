@@ -49,4 +49,11 @@ public class Layout : WebAppFixtureBaseTest
         var doc = await GetHtmlDocument();
         doc.NodeContainsInnerText("a","Privacy");
     }
+    
+    [Fact]
+    public async Task Should_Have_Calculator_Link()
+    {
+        var doc = await GetHtmlDocument();
+        doc.NodeContainsInnerText("a","Calculator");
+    }
 }

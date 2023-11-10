@@ -22,7 +22,28 @@ body {
   float: right;
 }
 
-.button, .is-grid-item, .input, input, .datetimepicker-dummy, .textarea, .pagination button, .action-buttons i {
+.button, .is-grid-item, .input, input, .datetimepicker-dummy, .textarea, .pagination button, .action-buttons i, .menu-button {
   border-radius: 8px;
 }
 
+.menu-button {
+  background-color: midnightblue;
+  border-color: black;
+  height: 78px;
+  /*margin: -0.75em 0 -0.75em 0;*/
+  font-size: 1.2em;
+  color: white;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.menu-button i::before {
+  opacity: 1 !important;
+}
+
+.menu-button:hover, .menu-button.is-hovered {
+  border-color: #b5b5b5;
+  background-color: royalblue;
+  color: midnightblue;
+  font-weight: bolder;
+}

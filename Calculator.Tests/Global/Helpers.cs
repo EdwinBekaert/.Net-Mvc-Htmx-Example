@@ -51,7 +51,5 @@ public static class Helpers
         => doc
             .GetNode($"{nodeFilter}[starts-with(@{attribute},'{value}')]".FixXpathFilter())
             .Should().NotBeNull();
-
-    internal static void NodeWithIdExists(this HtmlDocument doc, string nodeId)
-        => doc.GetNode($"//*[@id='{nodeId}']");
+    
 }

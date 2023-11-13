@@ -14,6 +14,7 @@ public class Calculator : WebAppFixtureBaseTest
         var response = await Client.GetAndValidateResponse("/Calculator");
         var doc = await response.LoadResponseAsHtmlDoc();
         foreach (var digit in App.Calculator.Digits)
-            doc.NodeWithIdExists($"numberDisplay-{digit}");
+            doc.GetElementbyId($"numberDisplay-{digit}")
+                .Should().NotBeNull();
     }
 }

@@ -6,4 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Calculator.App\Calculator.App.csproj" />
+    </ItemGroup>
+
 </Project>

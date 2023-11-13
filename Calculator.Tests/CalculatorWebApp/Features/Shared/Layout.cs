@@ -2,22 +2,13 @@
 
 namespace Calculator.Tests.CalculatorWebApp.Features.Shared;
 
-public class Layout : WebAppFixtureBaseTest
+public class Layout : LazyWebAppFixtureBaseTest
 {
-    private static Lazy<HttpResponseMessage>? _response; // one call for all tests...
-    private static HttpResponseMessage GetAndValidateResponse(TestHttpClient client)
-    {
-        return client.GetAndValidateResponse("/").Result;
-    }
-    public Layout(WebApplicationFactory<Program> factory) : base(factory)
-    {
-        _response ??= new Lazy<HttpResponseMessage>(() => GetAndValidateResponse(Client));
-        
-    }
+    public Layout(WebApplicationFactory<Program> factory) : base(factory, "/") {}
     
-    private static async Task<HtmlDocument> GetHtmlDocument()
+    private async Task<HtmlDocument> GetHtmlDocument()
     {
-        var response = _response!.Value;
+        var response = Response;
         var doc = await response.LoadResponseAsHtmlDoc();
         return doc;
     }

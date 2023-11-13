@@ -40,7 +40,7 @@ public class TestHttpClient
         };
     }
     
-    protected internal async Task<HttpResponseMessage> GetAndValidateResponse(string uri)
+    protected internal async Task<HttpResponseMessage> GetAndValidateResponse(string? uri)
     {
         var response = await Client.GetAsync(uri);
         response.ValidateSuccessResponse();

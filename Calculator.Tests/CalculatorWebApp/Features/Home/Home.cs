@@ -4,10 +4,7 @@ namespace Calculator.Tests.CalculatorWebApp.Features.Home;
 
 public class Home : WebAppFixtureBaseTest
 {
-    public Home(WebApplicationFactory<Program> webApp) : base(webApp)
-    {
-        
-    }
+    public Home(WebApplicationFactory<Program> webApp) : base(webApp) { }
     
     [Theory]
     [InlineData("/", "Home Page - app")]

@@ -4,8 +4,7 @@ namespace Calculator.Tests.CalculatorWebApp.Features.Home;
 
 public class Error : WebAppFixtureBaseTest
 {
-    public Error(WebApplicationFactory<Program> webApp) 
-        : base(webApp) { }
+    public Error(WebApplicationFactory<Program> webApp) : base(webApp) { }
 
     [Fact]
     public async Task Should_Display_Title_Headers_Paragraphs()

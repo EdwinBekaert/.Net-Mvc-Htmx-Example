@@ -4,8 +4,7 @@ namespace Calculator.Tests.CalculatorWebApp.Features.Home;
 
 public class Privacy : WebAppFixtureBaseTest
 {
-    public Privacy(WebApplicationFactory<Program> factory) 
-        : base(factory) { }
+    public Privacy(WebApplicationFactory<Program> factory) : base(factory) { }
 
     [Fact]
     public async Task Should_Display_Title_As_H1_And_One_Paragraph()

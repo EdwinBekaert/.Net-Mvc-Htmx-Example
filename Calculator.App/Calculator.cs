@@ -2,6 +2,7 @@
 
 public class Calculator
 {
+    public static int[] Digits => new[] { 7, 8, 9, 4, 5, 6, 1, 2, 3, 0 };
     private decimal _sum;
 
     public Calculator(decimal? sum = default) 

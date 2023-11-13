@@ -1,4 +1,4 @@
-namespace Calculator.Tests;
+namespace Calculator.Tests.CalculatorApp;
 
 public class CalculatorAppTests
 {
@@ -44,7 +44,7 @@ public class CalculatorAppTests
     [InlineData(null,null, 0)]
     [InlineData(1,null, 1)]
     [InlineData(null,5, -5)]
-    public void MinusShouldSubtractAmount(decimal start, decimal subtract, decimal expected)
+    public void MinusShouldSubtractAmount(decimal start, decimal subtract, decimal expected) // do NOT make nullable decimals as Xunit still has issues with them !
     {
         var calc = new App.Calculator(start);
         calc.Minus(subtract);
@@ -63,4 +63,12 @@ public class CalculatorAppTests
         calc.Equals().Should().Be(0);
     }
     
+    [Fact]
+    public void DigitsInOrderOfNumPad()
+    {
+        var digits = App.Calculator.Digits;
+        digits.Should().NotBeNull();
+        digits.Should().NotBeEmpty();
+        digits.Should().BeEquivalentTo(new[] { 7, 8, 9, 4, 5, 6, 1, 2, 3, 0 });
+    }
 }

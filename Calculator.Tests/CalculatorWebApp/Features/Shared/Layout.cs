@@ -4,15 +4,9 @@ namespace Calculator.Tests.CalculatorWebApp.Features.Shared;
 
 public class Layout : LazyWebAppFixtureBaseTest
 {
-    public Layout(WebApplicationFactory<Program> factory) : base(factory, "/") {}
+    private const string WebUri = "/";
+    public Layout(WebApplicationFactory<Program> factory) : base(factory, WebUri) {}
     
-    private async Task<HtmlDocument> GetHtmlDocument()
-    {
-        var response = Response;
-        var doc = await response.LoadResponseAsHtmlDoc();
-        return doc;
-    }
-
     [Fact]
     public async Task Should_Have_CSS()
     {

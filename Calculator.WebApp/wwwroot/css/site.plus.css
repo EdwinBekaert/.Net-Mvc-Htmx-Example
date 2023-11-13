@@ -10,10 +10,6 @@ html {
   }
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 .button.is-left {
   float: left;
 }
@@ -46,4 +42,24 @@ body {
   background-color: royalblue;
   color: midnightblue;
   font-weight: bolder;
+}
+
+.page-title {
+  padding: 5px 5px 5px 15px;
+  border-bottom: 2px solid midnightblue !important;
+  border-radius: 0;
+}
+
+.is-light-header {
+  background-color: #add8e659 !important;
+  color: midnightblue !important;
+  font-weight: bolder;
+}
+.number-button {
+  width: 130px;
+  height: 130px;
+}
+
+.is-royal-blue {
+  color: royalblue !important;
 }

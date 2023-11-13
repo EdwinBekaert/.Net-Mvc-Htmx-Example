@@ -9,23 +9,27 @@
     <link rel="stylesheet" href="~/css/site.plus.css" asp-append-version="true" />
 </head>
 <body hx-ext="morph" class="hero is-fullheight">
-<div class="header is-fixed-top columns has-text-grey-lighter p-0 mx-0 my-0 is-align-content-center is-justify-content-center" id="navBar">
-    <span class="column p-0">
-        <a class="button menu-button menu-button-left" asp-controller="Home" asp-action="Index">Home</a>
-        <a class="button menu-button menu-button-left" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        <a class="button menu-button menu-button-left" asp-controller="Calculator" asp-action="Index"><i class="fa fa-solid fa-calculator"></i>&nbsp;Calculator</a>
-    </span>
-</div>
-    
-<div class="container">
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu is-fixed-top p-0 mx-0 my-0 is-align-content-center is-justify-content-center" id="navBar">
+        <a class="navbar-item" asp-controller="Home" asp-action="Index">Home</a>
+        <a class="navbar-item" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <a class="navbar-item" asp-controller="Calculator" asp-action="Index"><i class="fa fa-solid fa-calculator"></i>&nbsp;Calculator</a>
+    </div>
+</nav>
+<div class="container is-fluid">
     <main role="main" class="pb-3">
-        @RenderBody()
+        <div class="notification is-light-header page-title">
+            <h1 class="title">@ViewData["Title"]</h1>
+        </div>
+        <div class="ml-3">
+            @RenderBody()
+        </div>
     </main>
 </div>
 
 <footer class="border-top footer text-muted">
     <div class="content has-text-centered is-small">
-        <p class="love">Made with <i class="fas fa-heart fa-lg"></i> in Sint-Kruis-Winkel by Edwin Bekaert</p>
+        <p class="love">Made with <i class="fas fa-heart fa-lg is-royal-blue"></i> in Sint-Kruis-Winkel by Edwin Bekaert</p>
         <p>&copy; 2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
     </div>
 </footer>

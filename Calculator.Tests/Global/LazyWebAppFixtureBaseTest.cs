@@ -3,8 +3,7 @@
 public abstract class LazyWebAppFixtureBaseTest : WebAppFixtureBaseTest
 {
     private static string? _uri;
-    private readonly Lazy<HttpResponseMessage> _lazyResponse 
-        = new(); // one call for all tests...
+    private readonly Lazy<HttpResponseMessage> _lazyResponse; // one call for all tests in the same fixture ... 
     protected HttpResponseMessage Response 
         => _lazyResponse.Value; 
     private static HttpResponseMessage GetAndValidateResponse(TestHttpClient client) 

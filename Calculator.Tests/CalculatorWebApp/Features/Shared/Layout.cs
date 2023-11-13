@@ -4,8 +4,8 @@ namespace Calculator.Tests.CalculatorWebApp.Features.Shared;
 
 public class Layout : LazyWebAppFixtureBaseTest
 {
-    private const string WebUri = "/";
-    public Layout(WebApplicationFactory<Program> factory) : base(factory, WebUri) {}
+    private const string Uri = "/";
+    public Layout(WebApplicationFactory<Program> factory) : base(factory, Uri) { }
     
     [Fact]
     public async Task Should_Have_CSS()

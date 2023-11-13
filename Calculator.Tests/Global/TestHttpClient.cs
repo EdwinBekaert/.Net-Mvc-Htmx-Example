@@ -7,7 +7,7 @@ namespace Calculator.Tests.Global;
 
 public class TestHttpClient
 {
-    internal HttpClient Client { get; }
+    private HttpClient Client { get; }
 
     internal TestHttpClient(WebApplicationFactory<Program> webApp)
     {

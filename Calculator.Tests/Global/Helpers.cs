@@ -38,7 +38,7 @@ public static class Helpers
 
     internal static void NodeContainsInnerText(this HtmlDocument doc, string nodeFilter, string expected) 
         => doc
-            .GetNode($"{nodeFilter}[text() = '{expected}']".FixXpathFilter())
+            .GetNode($"{nodeFilter}[contains(text(), '{expected}')]".FixXpathFilter())
             .Should().NotBeNull();
 
     internal static void NodeContainsHtmlClass(this HtmlDocument doc, string nodeFilter, string htmlClass)

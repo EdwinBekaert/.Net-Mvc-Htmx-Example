@@ -3,11 +3,12 @@
 public class Calculator
 {
     public static int[] Digits => new[] { 7, 8, 9, 4, 5, 6, 1, 2, 3, 0 };
+    public decimal ActiveValue; // value being entered
     private decimal _sum;
 
-    public Calculator(decimal? sum = default) 
-        => _sum = sum ?? default;
-
+    public Calculator(decimal? sum = default)
+        => (_sum, ActiveValue) = (sum ?? default, 0);
+    
     public decimal Equals() 
         => _sum;
 
@@ -28,5 +29,11 @@ public class Calculator
             _ when (decimal.MinValue + subtract ?? 0) > _sum => 0,
             _ => _sum - subtract ?? 0
         };
-    
+
+    public decimal InputNumber(uint input)
+        => ActiveValue = input switch
+        {
+            < 10U => 10UL * ActiveValue + input,
+            _ => throw new ArgumentOutOfRangeException(nameof(input), input, "Only use numbers 0->9")
+        };
 }

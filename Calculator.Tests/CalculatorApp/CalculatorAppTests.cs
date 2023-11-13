@@ -33,8 +33,8 @@ public class CalculatorAppTests
         var calc = new App.Calculator(decimal.MaxValue);
         calc.Equals().Should().Be(decimal.MaxValue);
         // now add one
-        var exception = Record.Exception(() => calc.Plus(1));
-        exception.Should().BeNull();
+        var func = () => calc.Plus(1);
+        func.Should().NotThrow();
         calc.Equals().Should().Be(0);
     }
     
@@ -58,8 +58,8 @@ public class CalculatorAppTests
         var calc = new App.Calculator(decimal.MinValue);
         calc.Equals().Should().Be(decimal.MinValue);
         // now add one
-        var exception = Record.Exception(() => calc.Minus(1));
-        exception.Should().BeNull();
+        var func = () => calc.Minus(1);
+        func.Should().NotThrow();
         calc.Equals().Should().Be(0);
     }
     
@@ -70,5 +70,41 @@ public class CalculatorAppTests
         digits.Should().NotBeNull();
         digits.Should().NotBeEmpty();
         digits.Should().BeEquivalentTo(new[] { 7, 8, 9, 4, 5, 6, 1, 2, 3, 0 });
+    }
+    
+    [Fact]
+    public void InputNumberShouldConcatActiveNumber()
+    {
+        var calc = new App.Calculator();
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(5);
+        calc.InputNumber(1);
+        calc.ActiveValue.Should().Be(51);
+        calc.InputNumber(1).Should().Be(511);
+    }
+    
+    [Fact]
+    public void InputNumberMayBeZero()
+    {
+        var calc = new App.Calculator();
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(0);
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(0);
+        calc.ActiveValue.Should().Be(0);
+    }
+    
+    [Fact]
+    public void InputNumberHigherThen9ThrowsOutOfRangeException ()
+    {
+        var calc = new App.Calculator();
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(1);
+        var func = () => calc.InputNumber(uint.MaxValue);
+        func.Should().Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Only use numbers 0->9 (Parameter 'input')\nActual value was 4294967295.");
+        calc.ActiveValue.Should().Be(1);
+        
     }
 }

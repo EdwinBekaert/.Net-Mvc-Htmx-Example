@@ -11,7 +11,8 @@ public class Calculator
     
     public decimal Equals() 
         => _sum;
-
+    
+    
     public decimal Plus(decimal? add = default)
         => _sum = (_sum, add) switch
         {

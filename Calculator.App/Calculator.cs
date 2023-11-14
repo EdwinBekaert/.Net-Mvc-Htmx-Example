@@ -46,7 +46,7 @@ public class Calculator : ICalculator
         => ResultValue;
     
     public decimal Plus(decimal? add = default)
-        => ResultValue = (_sum: ResultValue, add) switch
+        => ResultValue = (ResultValue, add) switch
         {
             (decimal.MaxValue, > 0) => 0, 
             (> 0, decimal.MaxValue) => 0, 
@@ -55,7 +55,7 @@ public class Calculator : ICalculator
         };
 
     public decimal Minus(decimal? subtract)
-        => ResultValue = (_sum: ResultValue, subtract) switch
+        => ResultValue = (ResultValue, subtract) switch
         {
             (decimal.MinValue, > 0) => 0,
             (> 0, decimal.MinValue) => 0,
@@ -65,15 +65,46 @@ public class Calculator : ICalculator
 
     public void PlusOperator()
     {
+        CalculateOperation();
         CurrentOperation = CalculatorOperations.Plus;
-        Plus(ActiveValue);
-        ActiveCalculation += "+";
+        AppendActiveOperation();
         ActiveValue = 0;
+    }
+
+    private void AppendActiveOperation()
+    {
+        ActiveCalculation += CurrentOperation switch
+        {
+            CalculatorOperations.None => string.Empty,
+            CalculatorOperations.Minus => "-",
+            CalculatorOperations.Plus => "+",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+    
+    public void MinusOperator()
+    {
+        CalculateOperation();
+        CurrentOperation = CalculatorOperations.Minus;
+        AppendActiveOperation();
+        ActiveValue = 0;
+    }
+
+    private void CalculateOperation()
+    {
+        ResultValue = CurrentOperation switch
+        {
+            CalculatorOperations.None => ActiveValue,
+            CalculatorOperations.Minus => Minus(ActiveValue),
+            CalculatorOperations.Plus => Plus(ActiveValue),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 }
 
 public enum CalculatorOperations
 {
     None = 0,
-    Plus
+    Plus,
+    Minus
 }

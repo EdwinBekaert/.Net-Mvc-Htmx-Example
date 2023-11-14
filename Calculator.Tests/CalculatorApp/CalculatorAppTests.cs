@@ -154,15 +154,117 @@ public class CalculatorAppTests
     [Fact]
     public void PlusOperationShouldSetFlagAndCalculateValues()
     {
-        var calc = new App.Calculator(10);
-        calc.ResultValue.Should().Be(10);
+        var calc = new App.Calculator();
+        calc.ResultValue.Should().Be(0);
         calc.ActiveValue.Should().Be(0);
         calc.InputNumber(5);
         calc.ActiveValue.Should().Be(5);
-        calc.ResultValue.Should().Be(10);
+        calc.ResultValue.Should().Be(0);
         calc.PlusOperator();
         calc.ActiveValue.Should().Be(0);
-        calc.ResultValue.Should().Be(15);
-        calc.ActiveCalculation.Should().Be("10+5+");
+        calc.ResultValue.Should().Be(5);
+        calc.InputNumber(7);
+        calc.InputNumber(1);
+        calc.ActiveValue.Should().Be(71);
+        calc.ResultValue.Should().Be(5);
+        calc.PlusOperator();
+        calc.ActiveCalculation.Should().Be("5+71+");
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(76);
     }
+    [Fact]
+    public void MinusOperationShouldCalculateValues()
+    {
+        var calc = new App.Calculator();
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(5);
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveCalculation.Should().Be("5");
+        calc.MinusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(5);
+        calc.ActiveCalculation.Should().Be("5-");
+        calc.InputNumber(1);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(15);
+        calc.ResultValue.Should().Be(5);
+        calc.MinusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(-10);
+        calc.ActiveCalculation.Should().Be("5-15-");
+    }
+    
+    [Fact]
+    public void MinusAndPlusOperationShouldCalculateValues()
+    {
+        var calc = new App.Calculator();
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(5);
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveCalculation.Should().Be("5");
+        calc.PlusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(5);
+        calc.ActiveCalculation.Should().Be("5+");
+        calc.InputNumber(1);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(15);
+        calc.ResultValue.Should().Be(5);
+        calc.PlusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(20);
+        calc.ActiveCalculation.Should().Be("5+15+");
+        calc.InputNumber(7);
+        calc.ActiveValue.Should().Be(7);
+        calc.ResultValue.Should().Be(20);
+        calc.MinusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(27);
+        calc.ActiveCalculation.Should().Be("5+15+7-");
+        calc.InputNumber(1);
+        calc.InputNumber(7);
+        calc.PlusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(10);
+    }
+    [Fact]
+    public void MinusAndPlusOperationShouldCalculateValues2()
+    {
+        var calc = new App.Calculator();
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(5);
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveCalculation.Should().Be("5");
+        calc.MinusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(5);
+        calc.ActiveCalculation.Should().Be("5-");
+        calc.InputNumber(1);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(15);
+        calc.ResultValue.Should().Be(5);
+        calc.MinusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(-10);
+        calc.ActiveCalculation.Should().Be("5-15-");
+        calc.InputNumber(7);
+        calc.ActiveValue.Should().Be(7);
+        calc.ResultValue.Should().Be(-10);
+        calc.PlusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(-17);
+        calc.ActiveCalculation.Should().Be("5-15-7+");
+        calc.InputNumber(1);
+        calc.InputNumber(7);
+        calc.PlusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(0);
+    }
+    
 }

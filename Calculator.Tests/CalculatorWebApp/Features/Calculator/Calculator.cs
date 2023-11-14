@@ -14,6 +14,8 @@ public class Calculator : LazyWebAppFixtureBaseTest
         foreach (var digit in App.Calculator.Digits)
             doc.GetElementbyId($"numberDisplay-{digit}")
                 .Should().NotBeNull();
+        doc.GetElementbyId("clearButton")
+            .Should().NotBeNull();
     }
     
     [Fact]

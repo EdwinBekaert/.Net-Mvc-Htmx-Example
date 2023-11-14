@@ -21,6 +21,15 @@
                         </p>
                     </div>
                 }
+                <div id="clearButton" class="column is-info is-responsive is-one-third">
+                    <p class="button clear-button"
+                       hx-get="@Url.Action("Clear", "Calculator")"
+                       hx-trigger="click"
+                       hx-swap="outerHTML"
+                       hx-target="#divResults">
+                        &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-eraser"></i>&nbsp;&nbsp;&nbsp;
+                    </p>
+                </div>
             </div>
         </div>
     </div>

@@ -55,11 +55,11 @@ html {
   color: midnightblue !important;
   font-weight: bolder;
 }
-.number-button {
+.number-button, .clear-button {
   width: 130px;
   height: 130px;
 }
 
-.is-royal-blue {
+.is-royal-blue, .clear-button {
   color: royalblue !important;
 }

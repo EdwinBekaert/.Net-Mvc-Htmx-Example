@@ -6,12 +6,16 @@
 <div id="CalculatorButtons">
     <h1 class="display-4">Calculator</h1>
     <div class="columns is-centered">
-        <div class="column is-one-third">
+        <div class="column is-4">
             <partial model="Model" name="_CalculatorResult"/>
+        </div>
+    </div>
+    <div class="columns is-centered">
+        <div class="column is-3">
             <div class="columns buttons are-large has-text-centered" id="digits">
                 @foreach (var number in Model.Digits)
                 {
-                    <div id="numberDisplay-@number" class="column is-info is-responsive is-one-third">
+                    <div id="numberDisplay-@number" class="column is-one-third">
                         <p class="button number-button"
                            hx-get="@Url.Action("InputNumber", "Calculator")/@number"
                            hx-trigger="click, keyup[key=='@number'] from:body"
@@ -21,7 +25,7 @@
                         </p>
                     </div>
                 }
-                <div id="clearButton" class="column is-info is-responsive is-one-third">
+                <div id="clearButton" class="column is-one-third">
                     <p class="button clear-button"
                        hx-get="@Url.Action("Clear", "Calculator")"
                        hx-trigger="click, keyup[key=='Backspace'||key=='Delete'] from:body"
@@ -30,6 +34,17 @@
                         &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-eraser"></i>&nbsp;&nbsp;&nbsp;
                     </p>
                 </div>
+            </div>
+        </div>
+        <div class="column is-1">
+            <div id="plusButton" class="column is-one-third">
+                <p class="button plus-button menu-button"
+                   hx-get="@Url.Action("Plus", "Calculator")"
+                   hx-trigger="click, keyup[key=='Plus'] from:body"
+                   hx-swap="outerHTML"
+                   hx-target="#divResults">
+                    &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-plus"></i>&nbsp;&nbsp;&nbsp;
+                </p>
             </div>
         </div>
     </div>

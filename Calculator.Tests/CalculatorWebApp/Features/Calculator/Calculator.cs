@@ -8,13 +8,15 @@ public class Calculator : LazyWebAppFixtureBaseTest
     public Calculator(WebApplicationFactory<Program> webApp) : base(webApp, Uri) { }
     
     [Fact]
-    public async Task Should_Display_All_Digits()
+    public async Task Should_Display_All_Digits_And_Buttons()
     {
         var doc = await GetHtmlDocument();
         foreach (var digit in App.Calculator.Digits)
             doc.GetElementbyId($"numberDisplay-{digit}")
                 .Should().NotBeNull();
         doc.GetElementbyId("clearButton")
+            .Should().NotBeNull();
+        doc.GetElementbyId("plusButton")
             .Should().NotBeNull();
     }
     
@@ -46,7 +48,7 @@ public class Calculator : LazyWebAppFixtureBaseTest
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
         result = await Client.GetAndValidateResponse($"{Uri}/Clear");
         doc = await result.LoadResponseAsHtmlDoc();
-        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("0,00");
+        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("   0,00");
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
     }
 }

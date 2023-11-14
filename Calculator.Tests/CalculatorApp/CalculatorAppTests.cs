@@ -3,14 +3,16 @@ namespace Calculator.Tests.CalculatorApp;
 public class CalculatorAppTests
 {
     [Theory]
-    [InlineData(5,5)]
-    [InlineData(5.12,5.12)]
-    [InlineData(null,0)]
-    public void CanCreateCalculatorWithStartingNumber(decimal number, decimal expected)
+    [InlineData(5,5, "5+")]
+    [InlineData(5.12,5.12, "5,12+")]
+    [InlineData(null,0, "")]
+    public void CanCreateCalculatorWithStartingNumber(decimal number, decimal expected, string calculation)
     {
         var calc = new App.Calculator(number);
         calc.Equals().Should().Be(expected);
         calc.ResultValue.Should().Be(expected);
+        calc.ActiveValue.Should().Be(0);
+        calc.ActiveCalculation.Should().Be(calculation);
     }
     
     [Theory]
@@ -87,6 +89,19 @@ public class CalculatorAppTests
     }
     
     [Fact]
+    public void InputNumberShouldConcatActiveCalculation()
+    {
+        var calc = new App.Calculator();
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveCalculation.Should().Be("5");
+        calc.InputNumber(1);
+        calc.ActiveCalculation.Should().Be("51");
+        calc.InputNumber(1);
+        calc.ActiveCalculation.Should().Be("511");
+    }
+    
+    [Fact]
     public void InputNumberMayBeZero()
     {
         var calc = new App.Calculator();
@@ -120,7 +135,6 @@ public class CalculatorAppTests
             calc.InputNumber(9);
         }
         calc.ActiveValue.Should().Be(decimal.MaxValue);
-        
     }
     
     [Fact]
@@ -135,5 +149,20 @@ public class CalculatorAppTests
         calc.Clear();
         calc.ActiveValue.Should().Be(0);
         calc.ResultValue.Should().Be(0);
+    }
+    
+    [Fact]
+    public void PlusOperationShouldSetFlagAndCalculateValues()
+    {
+        var calc = new App.Calculator(10);
+        calc.ResultValue.Should().Be(10);
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(5);
+        calc.ResultValue.Should().Be(10);
+        calc.PlusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(15);
+        calc.ActiveCalculation.Should().Be("10+5+");
     }
 }

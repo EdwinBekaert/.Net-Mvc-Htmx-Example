@@ -44,7 +44,10 @@ public class SessionCalculator : ICalculator
     
     public decimal ResultValue 
         => _calculator.ResultValue;
-    
+
+    public string ActiveCalculation
+        => _calculator.ActiveCalculation;
+
     public void Clear()
     {
         _calculator.Clear();
@@ -61,7 +64,13 @@ public class SessionCalculator : ICalculator
     public decimal Minus(decimal? subtract)
         => _calculator.Minus(subtract)
             .Do(_ => SetSessionValue()); // use do() extension
-    
+
+    public void PlusOperator()
+    {
+        _calculator.PlusOperator();
+        SetSessionValue();
+    }
+
     public decimal InputNumber(int input) 
         => _calculator.InputNumber(input)
             .Do(_ => SetSessionValue()); // use do() extension 

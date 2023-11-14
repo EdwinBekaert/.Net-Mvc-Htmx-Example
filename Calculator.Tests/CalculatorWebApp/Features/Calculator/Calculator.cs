@@ -26,11 +26,11 @@ public class Calculator : LazyWebAppFixtureBaseTest
         await GetAndValidateResponse(); // home calculator
         var result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/5");
         var doc = await result.LoadResponseAsHtmlDoc();
-        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("5,00");
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("5");
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
         result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/5");
         doc = await result.LoadResponseAsHtmlDoc();
-        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("55,00");
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("55");
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
     }
     
@@ -40,15 +40,32 @@ public class Calculator : LazyWebAppFixtureBaseTest
         await GetAndValidateResponse(); // home calculator
         var result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/5");
         var doc = await result.LoadResponseAsHtmlDoc();
-        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("5,00");
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("5");
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
         result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/9");
         doc = await result.LoadResponseAsHtmlDoc();
-        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("59,00");
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("59");
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
         result = await Client.GetAndValidateResponse($"{Uri}/Clear");
         doc = await result.LoadResponseAsHtmlDoc();
-        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("   0,00");
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("");
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
+    }
+    
+    [Fact]
+    public async Task PlusOperation_should_do_sum()
+    {
+        var result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/5");
+        var doc = await result.LoadResponseAsHtmlDoc();
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("5");
+        doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
+        result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/9");
+        doc = await result.LoadResponseAsHtmlDoc();
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("59");
+        doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
+        result = await Client.GetAndValidateResponse($"{Uri}/Plus");
+        doc = await result.LoadResponseAsHtmlDoc();
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("59&#x2B;"); // &#x2B; is plus symbol
+        doc.GetElementbyId("ResultValue").InnerText.Should().Be("59,00");
     }
 }

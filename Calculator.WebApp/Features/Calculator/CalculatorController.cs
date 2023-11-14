@@ -33,4 +33,12 @@ public class CalculatorController : Controller
         var viewModel = new CalculatorViewModel(_calc);
         return PartialView("_CalculatorResult", viewModel);
     }
+
+    [Route("Plus")]
+    public IActionResult Plus()
+    {
+        _calc.PlusOperator();
+        var viewModel = new CalculatorViewModel(_calc);
+        return PartialView("_CalculatorResult", viewModel);
+    }
 }

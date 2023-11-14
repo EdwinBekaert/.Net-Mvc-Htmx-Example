@@ -7,10 +7,11 @@ public class CalculatorViewModel
     public CalculatorViewModel(ICalculator calc)
     {
         Digits = App.Calculator.Digits;
-        ActiveValue = calc.ActiveValue;
         ResultValue = calc.ResultValue;
+        ActiveCalculation = calc.ActiveCalculation;
     }
+
     public int[] Digits { get; set; }
-    public decimal ActiveValue { get; set; }
     public decimal ResultValue { get; set; }
+    public string ActiveCalculation { get; set; }
 }

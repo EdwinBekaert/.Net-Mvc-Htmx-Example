@@ -40,7 +40,7 @@
             <div id="plusButton" class="column is-one-third">
                 <p class="button plus-button menu-button"
                    hx-get="@Url.Action("Plus", "Calculator")"
-                   hx-trigger="click, keyup[key=='Plus'] from:body"
+                   hx-trigger="click, keyup[key=='+'] from:body"
                    hx-swap="outerHTML"
                    hx-target="#divResults">
                     &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-plus"></i>&nbsp;&nbsp;&nbsp;

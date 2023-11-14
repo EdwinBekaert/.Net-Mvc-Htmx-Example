@@ -11,7 +11,7 @@ public abstract class LazyWebAppFixtureBaseTest : WebAppFixtureBaseTest
         _lazyResponse ??= new Lazy<Task<HttpResponseMessage>>(GetAndValidateResponse);
     }
 
-    private async Task<HttpResponseMessage> GetAndValidateResponse() 
+    protected async Task<HttpResponseMessage> GetAndValidateResponse() 
         => await Client.GetAndValidateResponse(_uri);
 
     protected async Task<HtmlDocument> GetHtmlDocument()

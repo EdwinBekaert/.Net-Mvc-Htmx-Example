@@ -33,7 +33,7 @@ public class Calculator : ICalculator
     public decimal InputNumber(int input)
         => ActiveValue = input switch
         {
-            < 10 => 10UL * ActiveValue + input,
+            < 10 => 10 * ActiveValue + input,
             _ => throw new ArgumentOutOfRangeException(nameof(input), input, "Only use numbers 0->9")
         };
 }

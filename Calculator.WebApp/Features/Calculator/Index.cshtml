@@ -1,14 +1,15 @@
-﻿@{
+﻿@model Calculator.WebApp.Features.Calculator.CalculatorViewModel
+@{
     ViewData["Title"] = "Calculator";
-    var numbers = App.Calculator.Digits;
 }
 
 <div id="CalculatorButtons">
     <h1 class="display-4">Calculator</h1>
     <div class="columns is-centered">
         <div class="column is-one-third">
+            <partial model="Model" name="_CalculatorResult"/>
             <div class="columns buttons are-large has-text-centered" id="digits">
-                @foreach (var number in numbers)
+                @foreach (var number in Model.Digits)
                 {
                     <div id="numberDisplay-@number" class="column is-info is-responsive is-one-third">
                         <p class="button number-button"

@@ -17,8 +17,8 @@ public class CalculatorController : Controller
         return View(viewModel);
     }
 
-    [HttpGet]
     [Route("InputNumber/{inputValue:int}")]
+    [HttpGet]
     public IActionResult InputNumber([FromRoute]int inputValue)
     {
         _calc.InputNumber(inputValue);
@@ -26,6 +26,7 @@ public class CalculatorController : Controller
     }
 
     [Route("Clear")]
+    [HttpGet]
     public IActionResult Clear()
     {
         _calc.Clear();
@@ -33,6 +34,7 @@ public class CalculatorController : Controller
     }
 
     [Route("Plus")]
+    [HttpGet]
     public IActionResult Plus()
     {
         _calc.PlusOperator();
@@ -40,12 +42,19 @@ public class CalculatorController : Controller
     }
 
     [Route("Minus")]
+    [HttpGet]
     public IActionResult Minus()
     {
         _calc.MinusOperator();
         return DisplayCalculatorResultPartial();
     }
 
+    private IActionResult DisplayCalculatorResultPartial()
+    {
+        var viewModel = new CalculatorViewModel(_calc);
+        return PartialView("_CalculatorResult", viewModel);
+    }
+    
     private IActionResult DisplayCalculatorResultPartial()
     {
         var viewModel = new CalculatorViewModel(_calc);

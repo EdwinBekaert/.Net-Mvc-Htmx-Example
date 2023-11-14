@@ -55,7 +55,8 @@ public class SessionCalculator : ICalculator
     }
     
     public decimal Equals()
-        => _calculator.Equals();
+        => _calculator.Equals()
+            .Do(_ => SetSessionValue()); // use do() extension
     
     public decimal Plus(decimal? add = default)
         => _calculator.Plus(add)

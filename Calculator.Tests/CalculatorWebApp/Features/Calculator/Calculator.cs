@@ -72,4 +72,22 @@ public class Calculator : LazyWebAppFixtureBaseTest
         doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be("59&#x2B;"); // &#x2B; is plus symbol
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("59,00");
     }
+    
+    [Fact]
+    public async Task Equals_should_do_sum()
+    {
+        var result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/5"); // 5
+        result.Should().NotBeNull();
+        result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/9"); // 59
+        result.Should().NotBeNull();
+        result = await Client.GetAndValidateResponse($"{Uri}/Plus"); // 59+
+        result.Should().NotBeNull();
+        result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/9"); //59+9
+        result.Should().NotBeNull();
+        result = await Client.GetAndValidateResponse($"{Uri}/Equals"); //59+9=68
+        result.Should().NotBeNull();
+        var doc = await result.LoadResponseAsHtmlDoc();
+        doc.GetElementbyId("ActiveCalculation").InnerText.Should().Be(""); // &#x2B; is plus symbol
+        doc.GetElementbyId("ResultValue").InnerText.Should().Be("68,00");
+    }
 }

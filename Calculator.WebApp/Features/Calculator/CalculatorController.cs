@@ -49,10 +49,12 @@ public class CalculatorController : Controller
         return DisplayCalculatorResultPartial();
     }
 
-    private IActionResult DisplayCalculatorResultPartial()
+    [Route("Equals")]
+    [HttpGet]
+    public IActionResult Equals()
     {
-        var viewModel = new CalculatorViewModel(_calc);
-        return PartialView("_CalculatorResult", viewModel);
+        _calc.Equals();
+        return DisplayCalculatorResultPartial();
     }
     
     private IActionResult DisplayCalculatorResultPartial()

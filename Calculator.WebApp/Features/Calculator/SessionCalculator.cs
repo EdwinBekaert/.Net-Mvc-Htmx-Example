@@ -73,5 +73,11 @@ public class SessionCalculator : ICalculator
 
     public decimal InputNumber(int input) 
         => _calculator.InputNumber(input)
-            .Do(_ => SetSessionValue()); // use do() extension 
+            .Do(_ => SetSessionValue()); // use do() extension
+    
+    public void MinusOperator()
+    {
+        _calculator.MinusOperator();
+        SetSessionValue();
+    }
 }

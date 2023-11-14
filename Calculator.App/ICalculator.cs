@@ -12,4 +12,5 @@ public interface ICalculator
     decimal Plus(decimal? add = default);
     decimal Minus(decimal? subtract);
     void PlusOperator();
+    void MinusOperator();
 }

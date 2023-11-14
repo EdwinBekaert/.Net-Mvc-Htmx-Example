@@ -24,29 +24,44 @@ public class SessionCalculator : ICalculator
 
     private static byte[]? GetSessionValue(IHttpContextAccessor httpContextAccessor) 
         => httpContextAccessor.HttpContext?.Session.Get(SessionKey);
+    
     private void SetSessionValue()
         => _httpContextAccessor.HttpContext?.Session.Set(SessionKey, Encoding.UTF8.GetBytes(SerializeCalculator()));
+    
     private static App.Calculator CreateCalc() 
         => new();
+    
     private static App.Calculator DeserializeCalculator(string sessionValue) 
         => JsonConvert.DeserializeObject<App.Calculator>(sessionValue) 
            ?? CreateCalc();
+    
     private string SerializeCalculator() 
         => JsonConvert.SerializeObject(_calculator);
 
+    // original object actions
     public decimal ActiveValue 
         => _calculator.ActiveValue;
+    
     public decimal ResultValue 
         => _calculator.ResultValue;
-
+    
+    public void Clear()
+    {
+        _calculator.Clear();
+        SetSessionValue();
+    }
+    
     public decimal Equals()
         => _calculator.Equals();
+    
     public decimal Plus(decimal? add = default)
         => _calculator.Plus(add)
             .Do(_ => SetSessionValue()); // use do() extension
+    
     public decimal Minus(decimal? subtract)
         => _calculator.Minus(subtract)
             .Do(_ => SetSessionValue()); // use do() extension
+    
     public decimal InputNumber(int input) 
         => _calculator.InputNumber(input)
             .Do(_ => SetSessionValue()); // use do() extension 

@@ -31,4 +31,22 @@ public class Calculator : LazyWebAppFixtureBaseTest
         doc.GetElementbyId("ActiveValue").InnerText.Should().Be("55,00");
         doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
     }
+    
+    [Fact]
+    public async Task Clear_should_clear_results()
+    {
+        await GetAndValidateResponse(); // home calculator
+        var result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/5");
+        var doc = await result.LoadResponseAsHtmlDoc();
+        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("5,00");
+        doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
+        result = await Client.GetAndValidateResponse($"{Uri}/InputNumber/9");
+        doc = await result.LoadResponseAsHtmlDoc();
+        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("59,00");
+        doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
+        result = await Client.GetAndValidateResponse($"{Uri}/Clear");
+        doc = await result.LoadResponseAsHtmlDoc();
+        doc.GetElementbyId("ActiveValue").InnerText.Should().Be("0,00");
+        doc.GetElementbyId("ResultValue").InnerText.Should().Be("0,00");
+    }
 }

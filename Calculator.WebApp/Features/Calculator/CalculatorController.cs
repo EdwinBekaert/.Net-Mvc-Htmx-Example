@@ -25,4 +25,12 @@ public class CalculatorController : Controller
         var viewModel = new CalculatorViewModel(_calc);
         return PartialView("_CalculatorResult", viewModel);
     }
+
+    [Route("Clear")]
+    public IActionResult Clear()
+    {
+        _calc.Clear();
+        var viewModel = new CalculatorViewModel(_calc);
+        return PartialView("_CalculatorResult", viewModel);
+    }
 }

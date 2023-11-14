@@ -1,3 +1,5 @@
+using Calculator.App;
+
 namespace Calculator.Tests.CalculatorApp;
 
 public class CalculatorAppTests
@@ -9,10 +11,10 @@ public class CalculatorAppTests
     public void CanCreateCalculatorWithStartingNumber(decimal number, decimal expected, string calculation)
     {
         var calc = new App.Calculator(number);
-        calc.Equals().Should().Be(expected);
         calc.ResultValue.Should().Be(expected);
         calc.ActiveValue.Should().Be(0);
         calc.ActiveCalculation.Should().Be(calculation);
+        calc.ResultValue.Should().Be(expected);
     }
     
     [Theory]
@@ -51,8 +53,6 @@ public class CalculatorAppTests
     {
         var calc = new App.Calculator(start);
         calc.Minus(subtract);
-        var result = calc.Equals();
-        result.Should().Be(expected);
         calc.ResultValue.Should().Be(expected);
     }
     
@@ -266,5 +266,28 @@ public class CalculatorAppTests
         calc.ActiveValue.Should().Be(0);
         calc.ResultValue.Should().Be(0);
     }
-    
+    [Fact]
+    public void EqualsShouldFinalizeLastOperationAndReturnTheResult()
+    {
+        var calc = new App.Calculator();
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(5);
+        calc.ResultValue.Should().Be(0);
+        calc.ActiveCalculation.Should().Be("5");
+        calc.MinusOperator();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(5);
+        calc.ActiveCalculation.Should().Be("5-");
+        calc.InputNumber(1);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(15);
+        calc.ResultValue.Should().Be(5);
+        calc.CurrentOperation.Should().Be(CalculatorOperations.Minus);
+        calc.Equals().Should().Be(-10);
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(-10);
+        calc.ActiveCalculation.Should().Be(string.Empty);
+    }
 }

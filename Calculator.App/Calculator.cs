@@ -42,9 +42,15 @@ public class Calculator : ICalculator
     public void Clear() 
         => (ActiveValue, ResultValue, ActiveCalculation) = (0, 0, string.Empty);
     
-    public decimal Equals() 
-        => ResultValue;
-    
+    public decimal Equals()
+    {
+        CalculateOperation();
+        CurrentOperation = CalculatorOperations.None;
+        ActiveCalculation = string.Empty;
+        ActiveValue = 0;
+        return ResultValue;
+    }
+
     public decimal Plus(decimal? add = default)
         => ResultValue = (ResultValue, add) switch
         {
@@ -94,7 +100,9 @@ public class Calculator : ICalculator
     {
         ResultValue = CurrentOperation switch
         {
-            CalculatorOperations.None => ActiveValue,
+            CalculatorOperations.None => ActiveValue > 0 
+                ? ActiveValue  // initial value entered 
+                : ResultValue, // keep result as there is non active value  
             CalculatorOperations.Minus => Minus(ActiveValue),
             CalculatorOperations.Plus => Plus(ActiveValue),
             _ => throw new ArgumentOutOfRangeException()

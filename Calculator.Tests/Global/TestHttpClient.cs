@@ -12,7 +12,7 @@ public class TestHttpClient
     internal TestHttpClient(WebApplicationFactory<Program> webApp)
     {
         var factory = webApp.WithWebHostBuilder(GetCustomBuilder());
-        //_serviceProvider = _factory.Services.CreateScope().ServiceProvider;
+        //var t = factory.Services.CreateScope().ServiceProvider;
         Client = factory.CreateClient();
         // add headers
         Client.DefaultRequestHeaders.Clear();
@@ -28,14 +28,6 @@ public class TestHttpClient
             builder.ConfigureTestServices(services =>
             {
                 // replace the database context
-                //
-                // mock the HTTPContext 
-                var contextAccessor = new Mock<IHttpContextAccessor>();
-                contextAccessor
-                    .Setup(i => i.HttpContext)
-                    .Returns(new DefaultHttpContext());
-                
-                services.AddSingleton(_ => contextAccessor.Object);
             });
         };
     }

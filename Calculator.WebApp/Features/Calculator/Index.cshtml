@@ -11,7 +11,11 @@
                 @foreach (var number in numbers)
                 {
                     <div id="numberDisplay-@number" class="column is-info is-responsive is-one-third">
-                        <p class="button number-button">&nbsp;&nbsp;&nbsp;@number&nbsp;&nbsp;&nbsp;</p>
+                        <p class="button number-button"
+                           hx-get="@Url.Action("InputNumber", "Calculator")/@number"
+                           hx-trigger="click">
+                            &nbsp;&nbsp;&nbsp;@number&nbsp;&nbsp;&nbsp;
+                        </p>
                     </div>
                 }
             </div>

@@ -101,9 +101,9 @@ public class CalculatorAppTests
         var calc = new App.Calculator();
         calc.ActiveValue.Should().Be(0);
         calc.InputNumber(1);
-        var func = () => calc.InputNumber(uint.MaxValue);
+        var func = () => calc.InputNumber(int.MaxValue);
         func.Should().Throw<ArgumentOutOfRangeException>()
-            .WithMessage("Only use numbers 0->9 (Parameter 'input')\nActual value was 4294967295.");
+            .WithMessage("Only use numbers 0->9 (Parameter 'input')\nActual value was 2147483647.");
         calc.ActiveValue.Should().Be(1);
         
     }

@@ -10,6 +10,7 @@ public class CalculatorAppTests
     {
         var calc = new App.Calculator(number);
         calc.Equals().Should().Be(expected);
+        calc.ResultValue.Should().Be(expected);
     }
     
     [Theory]
@@ -50,6 +51,7 @@ public class CalculatorAppTests
         calc.Minus(subtract);
         var result = calc.Equals();
         result.Should().Be(expected);
+        calc.ResultValue.Should().Be(expected);
     }
     
     [Fact]
@@ -96,7 +98,7 @@ public class CalculatorAppTests
     }
     
     [Fact]
-    public void InputNumberHigherThen9ThrowsOutOfRangeException ()
+    public void InputNumberHigherThen9ThrowsOutOfRangeException()
     {
         var calc = new App.Calculator();
         calc.ActiveValue.Should().Be(0);
@@ -106,5 +108,19 @@ public class CalculatorAppTests
             .WithMessage("Only use numbers 0->9 (Parameter 'input')\nActual value was 2147483647.");
         calc.ActiveValue.Should().Be(1);
         
+    }
+    
+    [Fact]
+    public void ClearShouldSetActiveAndResultToZero()
+    {
+        var calc = new App.Calculator(10);
+        calc.ResultValue.Should().Be(10);
+        calc.ActiveValue.Should().Be(0);
+        calc.InputNumber(5);
+        calc.ActiveValue.Should().Be(5);
+        calc.ResultValue.Should().Be(10);
+        calc.Clear();
+        calc.ActiveValue.Should().Be(0);
+        calc.ResultValue.Should().Be(0);
     }
 }

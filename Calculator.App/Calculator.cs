@@ -9,6 +9,16 @@ public class Calculator : ICalculator
     public Calculator(decimal? sum = default)
         => (ResultValue, ActiveValue) = (sum ?? default, 0);
     
+    public decimal InputNumber(int input)
+        => ActiveValue = input switch
+        {
+            < 10 => 10 * ActiveValue + input,
+            _ => throw new ArgumentOutOfRangeException(nameof(input), input, "Only use numbers 0->9")
+        };
+
+    public void Clear() 
+        => (ActiveValue, ResultValue) = (0, 0);
+    
     public decimal Equals() 
         => ResultValue;
     
@@ -30,10 +40,5 @@ public class Calculator : ICalculator
             _ => ResultValue - subtract ?? 0
         };
 
-    public decimal InputNumber(int input)
-        => ActiveValue = input switch
-        {
-            < 10 => 10 * ActiveValue + input,
-            _ => throw new ArgumentOutOfRangeException(nameof(input), input, "Only use numbers 0->9")
-        };
+    
 }

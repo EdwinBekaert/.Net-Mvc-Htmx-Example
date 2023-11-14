@@ -10,11 +10,15 @@ public class Calculator : ICalculator
         => (ResultValue, ActiveValue) = (sum ?? default, 0);
     
     public decimal InputNumber(int input)
-        => ActiveValue = input switch
+    {
+        if((decimal.MaxValue - input) / 10m < ActiveValue)
+            return ActiveValue = decimal.MaxValue;
+        return ActiveValue = input switch
         {
-            < 10 => 10 * ActiveValue + input,
+            < 10 => 10m * ActiveValue + input,
             _ => throw new ArgumentOutOfRangeException(nameof(input), input, "Only use numbers 0->9")
         };
+    }
 
     public void Clear() 
         => (ActiveValue, ResultValue) = (0, 0);

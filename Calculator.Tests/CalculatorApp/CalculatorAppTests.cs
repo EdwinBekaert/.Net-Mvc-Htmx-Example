@@ -111,6 +111,19 @@ public class CalculatorAppTests
     }
     
     [Fact]
+    public void InputNumberExceedsMaxValueShouldReturnLastValue()
+    {
+        var calc = new App.Calculator();
+        calc.ActiveValue.Should().Be(0);
+        for (var i = 0; i < 30; i++)
+        {
+            calc.InputNumber(9);
+        }
+        calc.ActiveValue.Should().Be(decimal.MaxValue);
+        
+    }
+    
+    [Fact]
     public void ClearShouldSetActiveAndResultToZero()
     {
         var calc = new App.Calculator(10);

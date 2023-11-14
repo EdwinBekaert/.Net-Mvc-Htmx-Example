@@ -18,6 +18,8 @@ public class Calculator : LazyWebAppFixtureBaseTest
             .Should().NotBeNull();
         doc.GetElementbyId("plusButton")
             .Should().NotBeNull();
+        doc.GetElementbyId("minusButton")
+            .Should().NotBeNull();
     }
     
     [Fact]

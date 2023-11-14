@@ -55,7 +55,7 @@ html {
   color: midnightblue !important;
   font-weight: bolder;
 }
-.number-button, .clear-button, .plus-button {
+.number-button, .clear-button, .plus-button, .minus-button {
   width: 130px;
   height: 130px;
 }

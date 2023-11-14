@@ -46,6 +46,15 @@
                     &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-plus"></i>&nbsp;&nbsp;&nbsp;
                 </p>
             </div>
+            <div id="minusButton" class="column is-one-third">
+                <p class="button minus-button menu-button"
+                   hx-get="@Url.Action("Minus", "Calculator")"
+                   hx-trigger="click, keyup[key=='-'] from:body"
+                   hx-swap="outerHTML"
+                   hx-target="#divResults">
+                    &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-minus"></i>&nbsp;&nbsp;&nbsp;
+                </p>
+            </div>
         </div>
     </div>
 </div>

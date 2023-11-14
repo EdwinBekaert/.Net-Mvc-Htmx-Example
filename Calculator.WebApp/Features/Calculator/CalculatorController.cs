@@ -22,30 +22,32 @@ public class CalculatorController : Controller
     public IActionResult InputNumber([FromRoute]int inputValue)
     {
         _calc.InputNumber(inputValue);
-        var viewModel = new CalculatorViewModel(_calc);
-        return PartialView("_CalculatorResult", viewModel);
+        return DisplayCalculatorResultPartial();
     }
 
     [Route("Clear")]
     public IActionResult Clear()
     {
         _calc.Clear();
-        var viewModel = new CalculatorViewModel(_calc);
-        return PartialView("_CalculatorResult", viewModel);
+        return DisplayCalculatorResultPartial();
     }
 
     [Route("Plus")]
     public IActionResult Plus()
     {
         _calc.PlusOperator();
-        var viewModel = new CalculatorViewModel(_calc);
-        return PartialView("_CalculatorResult", viewModel);
+        return DisplayCalculatorResultPartial();
     }
 
     [Route("Minus")]
     public IActionResult Minus()
     {
         _calc.MinusOperator();
+        return DisplayCalculatorResultPartial();
+    }
+
+    private IActionResult DisplayCalculatorResultPartial()
+    {
         var viewModel = new CalculatorViewModel(_calc);
         return PartialView("_CalculatorResult", viewModel);
     }

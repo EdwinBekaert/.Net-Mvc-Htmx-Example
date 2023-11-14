@@ -1,8 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-using Calculator.App;
-
 var calc = new Calculator.App.Calculator();
 
 var result = calc.Plus(5);

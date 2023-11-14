@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Calculator.App\Calculator.App.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
 </Project>

@@ -12,7 +12,6 @@ public class Calculator : ICalculator
     public decimal Equals() 
         => ResultValue;
     
-    
     public decimal Plus(decimal? add = default)
         => ResultValue = (_sum: ResultValue, add) switch
         {

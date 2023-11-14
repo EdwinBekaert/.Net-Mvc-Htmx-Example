@@ -1,3 +1,4 @@
+using Calculator.WebApp.Features.Shared;
 using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Calculator.WebApp;
@@ -15,6 +16,9 @@ public abstract class Program
             options.ViewLocationFormats.Add("~/Features/{1}/{0}.cshtml");
             options.ViewLocationFormats.Add("~/Features/Shared/{0}.cshtml");
         });
+        builder.Services.AddSessionServices(); // what we need for Calculator
+        builder.Services.AddAntiforgery();
+        // build the app 
         var app = builder.Build();
         if (!app.Environment.IsDevelopment())
         {
@@ -23,6 +27,7 @@ public abstract class Program
         }
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+        app.UseSession(); 
         app.UseRouting();
         app.MapControllerRoute(
             name: "default",

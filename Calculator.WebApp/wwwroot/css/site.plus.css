@@ -55,9 +55,15 @@ html {
   color: midnightblue !important;
   font-weight: bolder;
 }
+
 .number-button, .clear-button, .plus-button, .minus-button {
   width: 130px;
   height: 130px;
+}
+
+.equals-button {
+  width: 130px;
+  height: 260px;
 }
 
 .is-royal-blue, .clear-button {

@@ -55,6 +55,15 @@
                     &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-minus"></i>&nbsp;&nbsp;&nbsp;
                 </p>
             </div>
+            <div id="equalsButton" class="column is-one-third">
+                <p class="button equals-button menu-button"
+                   hx-get="@Url.Action("Equals", "Calculator")"
+                   hx-trigger="click, keyup[key=='='||key=='Enter'] from:body"
+                   hx-swap="outerHTML"
+                   hx-target="#divResults">
+                    &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-equals"></i>&nbsp;&nbsp;&nbsp;
+                </p>
+            </div>
         </div>
     </div>
 </div>

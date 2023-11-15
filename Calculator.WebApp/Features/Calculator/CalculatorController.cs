@@ -7,7 +7,7 @@ namespace Calculator.WebApp.Features.Calculator;
 public class CalculatorController : Controller
 {
     private readonly ICalculator _calc;
-
+    
     public CalculatorController(IHttpContextAccessor httpContextAccessor) 
         => _calc = new SessionCalculator(httpContextAccessor);
 
@@ -17,7 +17,7 @@ public class CalculatorController : Controller
         return View(viewModel);
     }
 
-    [Route("InputNumber/{inputValue:int}")]
+    [Route(Routes.InputNumber + "/{inputValue:int}")]
     [HttpGet]
     public IActionResult InputNumber([FromRoute]int inputValue)
     {
@@ -25,7 +25,7 @@ public class CalculatorController : Controller
         return DisplayCalculatorResultPartial();
     }
 
-    [Route("Clear")]
+    [Route(Routes.Clear)]
     [HttpGet]
     public IActionResult Clear()
     {
@@ -33,7 +33,7 @@ public class CalculatorController : Controller
         return DisplayCalculatorResultPartial();
     }
 
-    [Route("Plus")]
+    [Route(Routes.Plus)]
     [HttpGet]
     public IActionResult Plus()
     {
@@ -41,7 +41,7 @@ public class CalculatorController : Controller
         return DisplayCalculatorResultPartial();
     }
 
-    [Route("Minus")]
+    [Route(Routes.Minus)]
     [HttpGet]
     public IActionResult Minus()
     {
@@ -49,7 +49,7 @@ public class CalculatorController : Controller
         return DisplayCalculatorResultPartial();
     }
 
-    [Route("Equals")]
+    [Route(Routes.Equal)]
     [HttpGet]
     public IActionResult Equals()
     {
@@ -62,4 +62,14 @@ public class CalculatorController : Controller
         var viewModel = new CalculatorViewModel(_calc);
         return PartialView("_CalculatorResult", viewModel);
     }
+    
+    public static class Routes
+    {
+        public const string InputNumber = "InputNumber";
+        public const string Clear = "Clear";
+        public const string Plus = "Plus";
+        public const string Minus = "Minus";
+        public const string Equal = "Equals"; // Equals is reserved...
+    }
+     
 }

@@ -1,4 +1,4 @@
-﻿@model Calculator.WebApp.Features.Calculator.CalculatorViewModel
+﻿@model CalculatorViewModel
 @{
     ViewData["Title"] = "Calculator";
 }
@@ -15,52 +15,52 @@
             <div class="columns buttons are-large has-text-centered" id="digits">
                 @foreach (var number in Model.Digits)
                 {
-                    <div id="numberDisplay-@number" class="column is-one-third">
+                    <div id="@CalculatorViewModel.Keys.NumberDisplayPrefix@number" class="column is-one-third">
                         <p class="button number-button"
-                           hx-get="@Url.Action("InputNumber", "Calculator")/@number"
+                           hx-get="@Url.Action(CalculatorController.Routes.InputNumber, "Calculator")/@number"
                            hx-trigger="click, keyup[key=='@number'] from:body"
                            hx-swap="outerHTML"
-                           hx-target="#divResults">
+                           hx-target="#@CalculatorViewModel.Keys.Results">
                             &nbsp;&nbsp;&nbsp;@number&nbsp;&nbsp;&nbsp;
                         </p>
                     </div>
                 }
-                <div id="clearButton" class="column is-one-third">
+                <div id="@CalculatorViewModel.Keys.ClearButton" class="column is-one-third">
                     <p class="button clear-button"
-                       hx-get="@Url.Action("Clear", "Calculator")"
+                       hx-get="@Url.Action(CalculatorController.Routes.Clear, "Calculator")"
                        hx-trigger="click, keyup[key=='Backspace'||key=='Delete'] from:body"
                        hx-swap="outerHTML"
-                       hx-target="#divResults">
+                       hx-target="#@CalculatorViewModel.Keys.Results">
                         &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-eraser"></i>&nbsp;&nbsp;&nbsp;
                     </p>
                 </div>
             </div>
         </div>
         <div class="column is-1">
-            <div id="plusButton" class="column is-one-third">
+            <div id="@CalculatorViewModel.Keys.PlusButton" class="column is-one-third">
                 <p class="button plus-button menu-button"
-                   hx-get="@Url.Action("Plus", "Calculator")"
+                   hx-get="@Url.Action(CalculatorController.Routes.Plus, "Calculator")"
                    hx-trigger="click, keyup[key=='+'] from:body"
                    hx-swap="outerHTML"
-                   hx-target="#divResults">
+                   hx-target="#@CalculatorViewModel.Keys.Results">
                     &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-plus"></i>&nbsp;&nbsp;&nbsp;
                 </p>
             </div>
-            <div id="minusButton" class="column is-one-third">
+            <div id="@CalculatorViewModel.Keys.MinusButton" class="column is-one-third">
                 <p class="button minus-button menu-button"
-                   hx-get="@Url.Action("Minus", "Calculator")"
+                   hx-get="@Url.Action(CalculatorController.Routes.Minus, "Calculator")"
                    hx-trigger="click, keyup[key=='-'] from:body"
                    hx-swap="outerHTML"
-                   hx-target="#divResults">
+                   hx-target="#@CalculatorViewModel.Keys.Results">
                     &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-minus"></i>&nbsp;&nbsp;&nbsp;
                 </p>
             </div>
-            <div id="equalsButton" class="column is-one-third">
+            <div id="@CalculatorViewModel.Keys.EqualsButton" class="column is-one-third">
                 <p class="button equals-button menu-button"
-                   hx-get="@Url.Action("Equals", "Calculator")"
+                   hx-get="@Url.Action(CalculatorController.Routes.Equal, "Calculator")"
                    hx-trigger="click, keyup[key=='='||key=='Enter'] from:body"
                    hx-swap="outerHTML"
-                   hx-target="#divResults">
+                   hx-target="#@CalculatorViewModel.Keys.Results">
                     &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-equals"></i>&nbsp;&nbsp;&nbsp;
                 </p>
             </div>

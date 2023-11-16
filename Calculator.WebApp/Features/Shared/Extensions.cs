@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Calculator.App;
+using Calculator.WebApp.Features.Calculator;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Calculator.WebApp.Features.Shared;
 
@@ -23,6 +25,7 @@ public static class Extensions
         });
         services.AddHttpContextAccessor();
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.TryAddSingleton<IStateManager<ICalculator>, SessionManager<ICalculator>>();
         return services;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Calculator.App;
+using Calculator.WebApp.Features.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Calculator.WebApp.Features.Calculator;
@@ -9,7 +10,7 @@ public class CalculatorController : Controller
     private readonly ICalculator _calc;
     
     public CalculatorController(IHttpContextAccessor httpContextAccessor) 
-        => _calc = new SessionCalculator(httpContextAccessor);
+        => _calc = new SessionCalculator(new SessionManager<App.Calculator>(httpContextAccessor));
 
     public IActionResult Index()
     {

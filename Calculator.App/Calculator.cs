@@ -9,7 +9,7 @@ public class Calculator : ICalculator
     public CalculatorOperations CurrentOperation { get; set; }
     public string ActiveCalculation { get; set; }
 
-    public Calculator(decimal? sum = default)
+    public Calculator(decimal? sum)
     {
         if (sum is null or 0)
         {
@@ -23,6 +23,14 @@ public class Calculator : ICalculator
             CurrentOperation = CalculatorOperations.Plus;
             ActiveCalculation = $"{sum}+";
         }
+        ActiveValue = 0;
+    }
+
+    public Calculator()
+    {
+        ResultValue = default;
+        CurrentOperation = CalculatorOperations.None;
+        ActiveCalculation = string.Empty;
         ActiveValue = 0;
     }
 

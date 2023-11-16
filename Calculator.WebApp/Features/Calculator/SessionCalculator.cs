@@ -1,43 +1,23 @@
-using System.Text;
 using Calculator.App;
 using Calculator.WebApp.Features.Shared;
-using Newtonsoft.Json;
 
 namespace Calculator.WebApp.Features.Calculator;
 
 public class SessionCalculator : ICalculator
 {
+    private readonly IStateManager<App.Calculator> _stateManager;
     public const string SessionKey = "SessionCalculatorKey";
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly ICalculator _calculator;
+    private readonly App.Calculator _calculator;
     
-    public SessionCalculator(IHttpContextAccessor httpContextAccessor) // session decorator for the calculator
+    public SessionCalculator(IStateManager<App.Calculator> stateManager) // session decorator for the calculator
     {
-        _httpContextAccessor = httpContextAccessor;
-        if(httpContextAccessor.HttpContext is null)
-            throw new ArgumentNullException(nameof(httpContextAccessor));
-        var sessionValue = GetSessionValue(httpContextAccessor);
-        _calculator = sessionValue != null
-            ? DeserializeCalculator(Encoding.UTF8.GetString(sessionValue))
-            : CreateCalc();
+        _stateManager = stateManager;
+        _calculator = stateManager.GetState(SessionKey) ?? new App.Calculator();
     }
 
-    private static byte[]? GetSessionValue(IHttpContextAccessor httpContextAccessor) 
-        => httpContextAccessor.HttpContext?.Session.Get(SessionKey);
-    
     private void SetSessionValue()
-        => _httpContextAccessor.HttpContext?.Session.Set(SessionKey, Encoding.UTF8.GetBytes(SerializeCalculator()));
+        => _stateManager.SetState(SessionKey, _calculator);
     
-    private static App.Calculator CreateCalc() 
-        => new();
-    
-    private static App.Calculator DeserializeCalculator(string sessionValue) 
-        => JsonConvert.DeserializeObject<App.Calculator>(sessionValue) 
-           ?? CreateCalc();
-    
-    private string SerializeCalculator() 
-        => JsonConvert.SerializeObject(_calculator);
-
     // original object actions
     public decimal ActiveValue 
         => _calculator.ActiveValue;

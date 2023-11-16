@@ -9,8 +9,8 @@ public class CalculatorController : Controller
 {
     private readonly ICalculator _calc;
     
-    public CalculatorController(IHttpContextAccessor httpContextAccessor) 
-        => _calc = new SessionCalculator(new SessionManager<App.Calculator>(httpContextAccessor));
+    public CalculatorController(IStateManager<App.Calculator> sessionManager) 
+        => _calc = new SessionCalculator(sessionManager);
 
     public IActionResult Index()
     {

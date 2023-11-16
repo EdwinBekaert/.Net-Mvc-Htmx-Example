@@ -28,7 +28,7 @@ public class Calculator : ICalculator
 
     public Calculator()
     {
-        ResultValue = default;
+        ResultValue = 0;
         CurrentOperation = CalculatorOperations.None;
         ActiveCalculation = string.Empty;
         ActiveValue = 0;
